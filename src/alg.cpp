@@ -43,7 +43,7 @@ std::string infx2pstfx(std::string inf) {
             ps.push_back(stck.get());
             stck.pop();
           }
-          stck.push(ing[k]);
+          stck.push(inf[k]);
         }
       }
     }
@@ -69,7 +69,7 @@ int eval(std::string pref) {
       nach = kon + 1;
       bool tNum = true;
       for (int k = 0; k < temp.size(); ++k) {
-        if (temp[k] < '0' || temp[i] > '9') {
+        if (temp[k] < '0' || temp[k] > '9') {
           tNum = false;
           break;
         }
@@ -77,7 +77,7 @@ int eval(std::string pref) {
       if (tNum) {
         stck11.push(std::stoi(temp));
       } else {
-        mun = stck11.get();
+        num2 = stck11.get();
         stck11.pop();
         num = stck11.get();
         stck11.pop();
