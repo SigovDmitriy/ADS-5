@@ -1,19 +1,18 @@
-// Copyright 2021 NNTU-CS
 #include <string>
 #include <map>
 #include "tstack.h"
 
-int priority(char zn) {
-  if (zn == '(') {
+int priority(char ch) {
+  if (ch == '(') {
     return 0;
   }
-  if (zn == ')') {
+  if (ch == ')') {
     return 1;
   }
-  if (zn ==  '+' || zn == '-') {
+  if (ch ==  '+' || ch == '-') {
     return 2;
   }
-  if (zn == '*' || zn == '/') {
+  if (ch == '*' || ch == '/') {
     return 3;
   }
   return -1;
@@ -21,15 +20,15 @@ int priority(char zn) {
 std::string infx2pstfx(std::string inf) {
   TStack <char, 100> stck;
   std::string ps;
-  for (int k = 0; k < inf.size(); k++) {
-    int prir = priority(inf[k]);
+  for (int i = 0; i < inf.size(); i++) {
+    int prir = priority(inf[i]);
     if (prir == -1) {
-      if (!ps.empty() && priority(inf[k - 1]) != -1) {
+      if (!ps.empty() && priority(inf[i - 1]) != -1) {
         ps.push_back(' ');
       }
-      ps.push_back(inf[k]);
+      ps.push_back(inf[i]);
     } else if (prir == 0 || prir > priority(stck.get()) || stck.isEmpty()) {
-            stck.push(inf[k]);
+            stck.push(inf[i]);
         } else {
             if (prir == 1) {
                 while (stck.get() != '(') {
@@ -44,7 +43,7 @@ std::string infx2pstfx(std::string inf) {
                     ps.push_back(stck.get());
                     stck.pop();
                 }
-                stck.push(inf[k]);
+                stck.push(inf[i]);
             }
         }
     }
@@ -55,42 +54,45 @@ std::string infx2pstfx(std::string inf) {
     }
     return ps;
 }
+
 int eval(std::string pref) {
-    TStack <int, 100> stck11;
+    TStack <int, 100> stck1;
     std::string temp;
-    int num = 0, num2 = 0;
-    size_t nach = 0, kon = 0;
-    for (size_t k = 0; k < pref.size(); ++k) {
-        if (pref[k] == ' ' || k == pref.size() - 1) {
-            kon = k;
-            if (k == pref.size() - 1)
-                kon++;
-            temp = pref.substr(nach, kon - nach);
-            nach = kon + 1;
+    int num = 0, mun = 0;
+    size_t beg = 0, fin = 0;
+    for (size_t i = 0; i < pref.size(); ++i) {
+        if (pref[i] == ' ' || i == pref.size() - 1) {
+            fin = i;
+            if (i == pref.size() - 1)
+                fin++;
+            temp = pref.substr(beg, fin - beg);
+            beg = fin + 1;
             bool tNum = true;
-            for (int k = 0; k < temp.size(); ++k) {
-                if (temp[k] < '0' || temp[k] > '9') {
+            for (int i = 0; i < temp.size(); ++i) {
+                if (temp[i] < '0' || temp[i] > '9') {
                     tNum = false;
                     break;
                 }
             }
             if (tNum) {
-                stck11.push(std::stoi(temp));
+                stck1.push(std::stoi(temp));
+            }
+            else {
             } else {
-                num2 = stck11.get();
-                stck11.pop();
-                num = stck11.get();
-                stck11.pop();
+                mun = stck1.get();
+                stck1.pop();
+                num = stck1.get();
+                stck1.pop();
                 if (temp == "+")
-                    stck11.push(num + num2);
+                    stck1.push(num + mun);
                 else if (temp == "-")
-                    stck11.push(num - num2);
+                    stck1.push(num - mun);
                 else if (temp == "*")
-                    stck11.push(num * num2);
+                    stck1.push(num * mun);
                 else if (temp == "/")
-                    stck11.push(num / num2);
+                    stck1.push(num / mun);
             }
         }
     }
-    return stck11.get();
+    return stck1.get();
 }
