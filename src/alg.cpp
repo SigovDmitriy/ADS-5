@@ -37,6 +37,8 @@ std::string infx2pstfx(std::string inf) {
           ps.push_back(' ');
           ps.push_back(stck.get());
           stck.pop();
+        }
+        stck.pop();
         } else {
           while (priority(stck.get()) >= pri) {
             ps.push_back(' ');
@@ -54,7 +56,7 @@ std::string infx2pstfx(std::string inf) {
     }
     return ps;
 }
-  
+
 int eval(std::string pref) {
   TStack <int, 100> stck11;
   std::string temp;
