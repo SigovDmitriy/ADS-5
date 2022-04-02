@@ -26,19 +26,16 @@ std::string infx2pstfx(std::string inf) {
       if (!ps.empty() && priority(inf[k - 1]) != -1) {
         ps.push_back(' ');
       }
-      ps.push_back(inf [k]);
-    }
-    else if (pri == 0 || pri > priority(stck.get()) || stck.isEmpty()) {
+      ps.push_back(inf[k]);
+    } else if (pri == 0 || pri > priority(stck.get()) || stck.isEmpty()) {
       stck.push(inf[k]);
-    }
-    else {
+    } else {
       if (pri == 1) {
         while (stck.get() != '(') {
           ps.push_back(' ');
           ps.push_back(stck.get());
           stck.pop();
-        }
-        else {
+        } else {
           while (priority(stck.get()) >= pri) {
             ps.push_back(' ');
             ps.push_back(stck.get());
@@ -76,8 +73,6 @@ int eval(std::string pref) {
       }
       if (tNum) {
         stck11.push(std::stoi(temp));
-      }
-      else {
       } else {
         mun = stck11.get();
         stck11.pop();
