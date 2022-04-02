@@ -2,6 +2,7 @@
 #include <string>
 #include <map>
 #include "tstack.h"
+
 int priority(char zn) {
   if (zn == '(') {
     return 0;
@@ -17,6 +18,7 @@ int priority(char zn) {
   }
   return -1;
 }
+
 std::string infx2pstfx(std::string inf) {
   TStack <char, 100> stck;
   std::string ps;
@@ -52,6 +54,7 @@ std::string infx2pstfx(std::string inf) {
     }
     return ps;
 }
+  
 int eval(std::string pref) {
   TStack <int, 100> stck11;
   std::string temp;
