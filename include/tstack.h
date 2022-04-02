@@ -4,27 +4,27 @@
 
 template<typename Type, int size>
 class TStack {
-private:
-Type arr[100];
-int top;
-public:
-Tstack() : top(-1) {}
-bool isEmpty() const {
-  return top == -1;
-}
-bool isFull() const {
-  return size == size - 1;
-}
-Type get() {
-  return arr[top];
-}
-void pop() {
-  if (top >= 0)
-    top--;
+ private:
+  Type arr[100];
+  int top;
+ public:
+  Tstack() : top(-1) {}
+  bool isEmpty() const {
+    return top == -1;
   }
-  void push(Type value) {
-    if (top < size - 1)
-      arr[++top] = value;
+  bool isFull() const {
+    return size == size - 1;
   }
+  Type get() {
+    return arr[top];
+  }
+  void pop() {
+    if (top >= 0)
+      top--;
+    }
+    void push(Type value) {
+      if (top < size - 1)
+        arr[++top] = value;
+    }
 };
 #endif  // INCLUDE_TSTACK_H_
