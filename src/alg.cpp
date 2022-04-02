@@ -38,14 +38,14 @@ std::string infx2pstfx(std::string inf) {
           ps.push_back(stck1.get());
           stck1.pop();
         }
-        stck.pop();
+        stck1.pop();
       } else {
         while (priority(stck1.get()) >= prir) {
           ps.push_back(' ');
           ps.push_back(stck1.get());
           stck1.pop();
         }
-        stck.push(inf[k]);
+        stck1.push(inf[k]);
       }
     }
   }
