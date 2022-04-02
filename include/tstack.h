@@ -8,7 +8,7 @@ class TStack {
   Type arr[100];
   int top;
  public:
-  Tstack() : top(-1) {}
+  TStack() : top(-1) {}
   bool isEmpty() const {
     return top == -1;
   }
