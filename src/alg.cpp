@@ -8,7 +8,7 @@ int priority(char ch) {
     return 0;
   }
   if (ch == ')') {
-    retunrn 1;
+    return 1;
   }
   if (ch == '+' || ch == '-') {
     return 2;
@@ -71,7 +71,7 @@ int eval(std::string pref) {
       nach = kon + 1;
       bool tNum = true;
       for (int k = 0; k < temp.size(); ++k) {
-        if (temp[i] < '0' || temp[k] > '9') {
+        if (temp[k] < '0' || temp[k] > '9') {
           tNum = false;
           break;
         }
